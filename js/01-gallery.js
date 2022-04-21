@@ -34,10 +34,17 @@ function createModal(e) {
     const instance = basicLightbox.create(`<img src="${e.target.dataset.source}" />`);
     instance.show();
 
-    document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        instance.close();
-    };
-});
+    document.addEventListener('keydown', onEscClick);
+    
+    function onEscClick(e) {
+        if (e.key === 'Escape') {
+            instance.close();
+            document.removeEventListener('keydown', onEscClick);
+        };
+    }
+    
+
 };
+
+
 
